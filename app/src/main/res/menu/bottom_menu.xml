@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home"
+        android:title=""
+        android:icon="@drawable/journal_selector"
+        />
+
+    <item
+        android:id="@+id/shorts"
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:title=""
+
+        />
+
+    <item
+        android:title=""/>
+
+    <item
+        android:id="@+id/subscriptions"
+        android:title=""
+        android:icon="@drawable/gallery_selector" />
+    <item
+        android:id="@+id/library"
+        android:title=""
+        android:icon="@drawable/laugh_selector" />
+
+</menu>

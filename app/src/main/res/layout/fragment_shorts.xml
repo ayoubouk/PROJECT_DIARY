@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+
+        >
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:calendarViewStyle="@style/CalendarDayTextStyle"
+
+            />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <LinearLayout
+                    android:layout_marginTop="35px"
+                    android:layout_width="362dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="25 mai 2023"
+                        android:typeface="serif"
+                        android:textSize="20sp"
+                        android:textColor="#040404"
+                        android:fontFamily="@font/ramonabold"/>
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="SUJETSUJETSUJETSUJETSUJ"
+                        android:textSize="20sp"
+                        android:textColor="#838282"
+                        android:fontFamily="@font/ramonabold"/>
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="HBase est un système de gestion de base de données non-relationnelles distribué, écrit en Java, disposant d'un stockage structuré pour les grandes tables."
+                        android:fontFamily="@font/harmondcondensed"
+                        android:textSize="31sp"
+                        android:textColor="#B85E5E"
+                        android:textStyle="bold"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+</FrameLayout>
+
+
+
+
+
+
+
+
