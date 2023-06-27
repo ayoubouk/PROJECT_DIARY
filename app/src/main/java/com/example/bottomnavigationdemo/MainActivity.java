@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,8 +14,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import androidx.core.content.ContextCompat;
@@ -25,155 +28,119 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import androidx.annotation.NonNull;
+import android.app.TimePickerDialog;
+import android.widget.TimePicker;
+import android.app.DatePickerDialog;
+import android.widget.DatePicker;
+import java.util.Calendar;
+import java.text.DateFormatSymbols;
+import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import android.widget.EditText;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.AuthResult;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnCompleteListener;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
+    private Button loginButton;
+    private TextView gotoRegisterTextView;
+    private EditText emailEditText, passwordEditText;
+    private FirebaseAuth mAuth;
     DatabaseReference databaseRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // FirebaseDatabase database=FirebaseDatabase.getInstance();
-        //DatabaseReference myRef= database.getReference();
-        //myRef.child("utilisateur").child("1").setValue("hello");
+        setContentView(R.layout.activity_main);
+        //la partie home
+        loginButton = findViewById(R.id.btnLogin);
 
-        // Obtenir une référence à la base de données Firebase
-        //databaseRef = FirebaseDatabase.getInstance().getReference();
-        // Récupérer les données
-        //getDataFromFirebase();
+        // Initialisation de Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
+        emailEditText = findViewById(R.id.inputEmail);
+        passwordEditText = findViewById(R.id.inputPassword);
 
 
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        replaceFragment(new HomeFragment());
-
-        binding.bottomNavigationView.setBackground(null);
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-
-            switch (item.getItemId()) {
-                case R.id.home:
-                    replaceFragment(new HomeFragment());
-                    break;
-                case R.id.shorts:
-                    replaceFragment(new ShortsFragment());
-                    break;
-                case R.id.subscriptions:
-                    replaceFragment(new SubscriptionFragment());
-                    break;
-                case R.id.library:
-                    replaceFragment(new LibraryFragment());
-                    break;
-            }
-
-            return true;
-        });
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                showBottomDialog();
-            }
-        });
+            public void onClick(View v) {
+                String email = emailEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
 
-        BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
-        bottomAppBar.setBackground(ContextCompat.getDrawable(this, R.drawable.gradient));
-
-
-
-    }
-   /* private void getDataFromFirebase() {
-        DatabaseReference dataRef = databaseRef.child("1");
-
-        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String annee = dataSnapshot.child("année").getValue(String.class);
-                    String contenu = dataSnapshot.child("contenu").getValue(String.class);
-                    long jour = dataSnapshot.child("jour").getValue(Long.class);
-                    String mois = dataSnapshot.child("mois").getValue(String.class);
-                    String titre = dataSnapshot.child("titre").getValue(String.class);
-
-                    // Utilisez les valeurs récupérées
-                    System.out.println("Année : " + annee);
-                    System.out.println("Contenu : " + contenu);
-                    System.out.println("Jour : " + jour);
-                    System.out.println("Mois : " + mois);
-                    System.out.println("Titre : " + titre);
-                } else {
-                    System.out.println("Aucune donnée trouvée");
+                // Vérification des champs e-mail et mot de passe
+                if (email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
                 }
-            }
+                else {
+                    // Connexion avec l'adresse e-mail et le mot de passe
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Connexion réussie
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        String uid = user.getUid();
+                                        UserId userid=new UserId(uid);
+                                        Toast.makeText(MainActivity.this, "Connexion réussie en tant que "+ user.getEmail(), Toast.LENGTH_SHORT).show();
 
+
+                                        navigateToHome();
+                                    } else {
+                                        // Erreur de connexion
+                                        Toast.makeText(MainActivity.this, "Échec de la connexion. Veuillez vérifier vos identifiants", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+        }
+        });
+
+        //la partie register
+        gotoRegisterTextView = findViewById(R.id.gotoRegister);
+        gotoRegisterTextView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                System.out.println("Erreur : " + databaseError.getMessage());
+            public void onClick(View v) {
+                navigateToRegisterActivity();
             }
         });
-    }*/
 
-    private  void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment);
-        fragmentTransaction.commit();
+          //la partie reinitialisation de code
+        TextView forgotPasswordTextView = findViewById(R.id.forgotPassword);
+        forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
-    private void showBottomDialog() {
 
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.bottomsheetlayout);
 
-        LinearLayout videoLayout = dialog.findViewById(R.id.layoutVideo);
-        LinearLayout shortsLayout = dialog.findViewById(R.id.layoutShorts);
-        LinearLayout liveLayout = dialog.findViewById(R.id.layoutLive);
-        ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
-
-        videoLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-                Toast.makeText(MainActivity.this,"Upload a Video is clicked",Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        shortsLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-                Toast.makeText(MainActivity.this,"Create a short is Clicked",Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        liveLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-                Toast.makeText(MainActivity.this,"Go live is Clicked",Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-
+    private void navigateToRegisterActivity() {
+        Intent intent = new Intent(MainActivity.this, Register.class);
+        startActivity(intent);
+        //finish();
+    }
+    private void navigateToHome() {
+        Intent intent = new Intent(MainActivity.this, app.class);
+        startActivity(intent);
+        //finish();
     }
 }
+
+
+
+
+
+
