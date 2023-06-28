@@ -21,10 +21,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mon Journal"
+
             android:textSize="30dp"
             android:padding="15dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
 
+            android:fontFamily="@font/ramonabold"
             ></TextView>
 
         <ScrollView

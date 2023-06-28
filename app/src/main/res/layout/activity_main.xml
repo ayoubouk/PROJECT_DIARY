@@ -45,6 +45,7 @@
         android:textColor="@android:color/white"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:fontFamily="@font/ramonabold"
         app:layout_constraintEnd_toStartOf="@+id/imageView5"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/topView"
@@ -95,6 +96,7 @@
         android:layout_marginEnd="32dp"
         android:backgroundTint="#F2994A"
         android:text="LOGIN"
+        android:fontFamily="@font/ramonabold"
         android:textColor="@color/purple_500"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -114,6 +116,7 @@
         android:textColor="#F2C94C"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:fontFamily="@font/ramonalight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
@@ -125,6 +128,7 @@
         android:layout_marginTop="32dp"
         android:text="OR"
         android:textSize="20dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgotPassword" />
@@ -164,6 +168,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:text="New User? Register Now"
+        android:fontFamily="@font/ramonalight"
         android:textColor="#F2C94C"
         android:textSize="18sp"
         android:textStyle="bold"

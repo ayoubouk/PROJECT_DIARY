@@ -23,7 +23,8 @@
             android:text="Calendrier"
             android:textSize="30dp"
             android:padding="15dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
+            android:fontFamily="@font/ramonabold"
 
             ></TextView>
         <androidx.cardview.widget.CardView
@@ -50,6 +51,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             app:srcCompat="@drawable/journalvide"
+            android:visibility="gone"
 
             />
 
@@ -68,7 +70,7 @@
                 android:background="@drawable/shadow"
                 android:padding="20dp"
                 android:layout_margin="20dp"
-                android:visibility="invisible"
+                android:visibility="visible"
                 >
 
                 <LinearLayout
@@ -85,29 +87,31 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-
+                         android:text="09 juin 2019"
                         android:typeface="serif"
-                        android:textSize="20sp"
-                        android:textColor="#BA0E0E"
-                        android:fontFamily="@font/kalamregular"/>
+                        android:textSize="23sp"
+                        android:textColor="#000000"
+                        android:fontFamily="@font/ramonabold"/>
 
                     <TextView
                         android:id="@+id/titre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
-                        android:textSize="20sp"
-                        android:textColor="#838282"
-                        android:fontFamily="@font/kalamlight"/>
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="journee inoubliable"
+                        android:textSize="25sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/ramonabold"/>
 
                     <TextView
                         android:id="@+id/contenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
-                        android:fontFamily="@font/kalambold"
-                        android:textSize="31sp"
-                        android:textColor="#B85E5E"
+                        android:text="hello woeld hello woel dhello woeld"
+                        android:fontFamily="@font/ramonalight"
+                        android:textSize="23sp"
+                        android:textColor="#4E4545"
                         android:textStyle="bold"
                         />
 

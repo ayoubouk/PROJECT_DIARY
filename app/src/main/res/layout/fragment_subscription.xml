@@ -20,7 +20,8 @@
             android:text="Galerie"
             android:textSize="30dp"
             android:padding="15dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
+            android:fontFamily="@font/ramonabold"
 
             ></TextView>
 
@@ -94,12 +95,17 @@
 
                         android:text="Aucune photo pour l'instant"
                         android:textSize="21dp"
+                        android:textStyle="bold"
+
+                        android:fontFamily="@font/ramonalight"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.269"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageButton2"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.0"
+
+                        />
 
                     <TextView
                         android:id="@+id/textView1"
@@ -112,6 +118,8 @@
                         android:layout_marginBottom="26dp"
                         android:text="toutes les photos de votre journal s'afficheront ici."
                         android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/ramonalight"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.368"

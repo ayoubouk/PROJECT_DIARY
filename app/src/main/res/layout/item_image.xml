@@ -33,20 +33,20 @@
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/kalambold"
+                    android:fontFamily="@font/ramonabold"
                     />
                 <TextView
                     android:id="@+id/UserId"
                    android:layout_marginTop="2dp"
                     android:text="PID:362Hb458760"
                     android:textSize="13sp"
-                    android:textStyle="normal"
+                    android:textStyle="bold"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:textColor="#5C5A5A"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/kalamregular"
+
                     />
                 <View
                     android:background="#79D6D1D1"
@@ -67,7 +67,7 @@
                         android:textColor="@color/black"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/kalambold"
+                        android:fontFamily="@font/ramonabold"
                         />
 
 
