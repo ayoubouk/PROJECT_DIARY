@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
+    android:background="@drawable/gradient_hb"
     tools:context=".MainActivity">
 
 
@@ -45,7 +45,7 @@
         android:backgroundTint="#F8D800"
         android:src="@drawable/ic_baseline_add_24"
         app:layout_anchor="@id/bottomAppBar"
-        app:maxImageSize="40dp"
+        app:maxImageSize="50dp"
         app:tint="@color/white"
         app:fabSize="auto"
 

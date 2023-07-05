@@ -1,11 +1,13 @@
 package com.example.bottomnavigationdemo;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Data {
-    private String titre;
-    private String contenu;
-    private int jour;
-    private String mois;
-    private String annee;
+    public static String titre;
+    public static String contenu;
+    public static int jour;
+    public static String mois;
+    public static String annee;
 
     // Ajoutez les getters et setters appropriés pour les champs
 
@@ -31,6 +33,16 @@ public class Data {
     }
     public void setAnnee(String annee) {
         this.annee = annee;
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("titre", titre);
+        result.put("contenu", contenu);
+        result.put("jour", jour);
+        result.put("mois", mois);
+        result.put("annee", annee);
+        return result;
     }
 
     public Data(String titre, String contenu, int jour, String mois, String annee){

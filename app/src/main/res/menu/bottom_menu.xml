@@ -5,12 +5,12 @@
     <item
         android:id="@+id/home"
         android:title=""
-        android:icon="@drawable/journal_selector"
+        android:icon="@drawable/journal"
         />
 
     <item
         android:id="@+id/shorts"
-        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:icon="@drawable/calendar"
         android:title=""
 
         />
@@ -21,10 +21,10 @@
     <item
         android:id="@+id/subscriptions"
         android:title=""
-        android:icon="@drawable/gallery_selector" />
+        android:icon="@drawable/gallery_" />
     <item
         android:id="@+id/library"
         android:title=""
-        android:icon="@drawable/laugh_selector" />
+        android:icon="@drawable/user" />
 
 </menu>

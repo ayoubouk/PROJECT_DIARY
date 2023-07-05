@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
+    android:background="@drawable/gradient_hb"
     tools:context=".HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -27,21 +27,24 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+
+            >
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible"
+
                 >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/galerielayout"
                     android:layout_width="match_parent"
                     android:layout_height="391dp"
 
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="80dp"
 
                     >
 
@@ -97,7 +100,7 @@
                         android:textSize="21dp"
                         android:textStyle="bold"
 
-                        android:fontFamily="@font/ramonalight"
+                        android:fontFamily="@font/ramonabold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.269"
@@ -119,7 +122,7 @@
                         android:text="toutes les photos de votre journal s'afficheront ici."
                         android:textSize="16dp"
                         android:textStyle="bold"
-                        android:fontFamily="@font/ramonalight"
+                        android:fontFamily="@font/ramonabold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.368"
@@ -129,8 +132,25 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+               <LinearLayout
+                   android:id="@+id/imageContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                   android:layout_marginBottom="20dp"
+
+                >
+
 
             </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+
         </ScrollView>
+
     </LinearLayout>
 </FrameLayout>

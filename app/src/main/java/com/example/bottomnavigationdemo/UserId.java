@@ -3,9 +3,13 @@ package com.example.bottomnavigationdemo;
 public class UserId {
     public static String uid;
     public static String username;
+    public static String idregister;
 
 
+    public UserId() {
 
+
+    }
     public UserId(String id) {
         // Constructeur privé pour empêcher l'instanciation directe
         this.uid=id;
@@ -14,6 +18,9 @@ public class UserId {
     public UserId(String id,String username){
         this.username=username;
     }
+
+
+
 
 
     public String getUid() {
@@ -30,5 +37,10 @@ public class UserId {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+
+    public void setIdregister(String register){
+        this.idregister=register;
     }
 }

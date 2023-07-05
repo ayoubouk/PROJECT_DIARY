@@ -2,5 +2,7 @@
 <resources>
     <dimen name="bottom_navigation_icon_size" >48dp</dimen>
     <dimen name="design_bottom_navigation_height" >100dp</dimen>
-
+    <dimen name="margin_20dp">15dp</dimen>
+    <dimen name="margin_bottom_4dp">4dp</dimen>
+    <dimen name="image_margin">16dp</dimen>
 </resources>

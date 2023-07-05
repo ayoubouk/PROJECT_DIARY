@@ -26,7 +26,7 @@
                 <TextView
                     android:id="@+id/UserName"
                     android:layout_marginTop="15dp"
-                    android:text="Mariya Doe"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:gravity="center"
@@ -38,7 +38,7 @@
                 <TextView
                     android:id="@+id/UserId"
                    android:layout_marginTop="2dp"
-                    android:text="PID:362Hb458760"
+                    android:text=""
                     android:textSize="13sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
@@ -84,7 +84,7 @@
 
     </RelativeLayout>
     <com.google.android.material.imageview.ShapeableImageView
-        android:src="@drawable/slider"
+        android:src="@drawable/uh2c"
         app:shapeAppearanceOverlay="@style/Circular"
         android:elevation="15dp"
         android:padding="5dp"

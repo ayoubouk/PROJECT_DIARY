@@ -41,7 +41,7 @@
         </LinearLayout>
         <TextView
             android:id="@+id/email"
-            android:text="malakinfoapp@gmail.com"
+            android:text=""
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="18sp"

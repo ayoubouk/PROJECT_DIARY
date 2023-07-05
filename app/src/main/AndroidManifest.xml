@@ -42,6 +42,11 @@
             android:name=".ForgotPasswordActivity"
             android:label="Forgot Password" />
 
+        <activity android:name=".ModiferSupprimer"
+            android:exported="true"></activity>
+
+
+
 
 
 

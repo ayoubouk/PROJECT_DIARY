@@ -36,6 +36,16 @@ import java.util.Date;
 import android.widget.EditText;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import android.content.Intent;
+import org.jetbrains.annotations.Nullable;
+import android.net.Uri;
+import com.google.firebase.storage.UploadTask;
+import java.util.UUID;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 
 public class app extends AppCompatActivity {
@@ -43,9 +53,11 @@ public class app extends AppCompatActivity {
     ActivityAppBinding binding;
     DatabaseReference databaseRef;
     private int i=1;
-
+    private static final int RC_IMAGE_PICKER = 1;
     String uid=UserId.uid ;
 
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,6 +194,7 @@ public class app extends AppCompatActivity {
                                 i++;
                                 Toast.makeText(app.this, "Données enregistrées avec succès", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
+
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -194,12 +207,24 @@ public class app extends AppCompatActivity {
 
 
 
-
-
-
-
             }
         });
+
+        //upload image
+
+        Button upload=dialog.findViewById(R.id.buttonSImg);
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Créez un sélecteur d'image pour permettre à l'utilisateur de choisir une image
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(Intent.createChooser(intent, "Select Image"), RC_IMAGE_PICKER);
+            }
+        });
+
+
+
 
 
 
@@ -218,6 +243,48 @@ public class app extends AppCompatActivity {
 
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE", Locale.FRENCH);
         return sdf.format(date);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_IMAGE_PICKER && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri imageUri = data.getData();
+
+            //"images/" Créez une référence à l'emplacement de stockage où vous souhaitez enregistrer l'image
+            StorageReference imageRef = storageRef.child(UserId.uid+"/" + UUID.randomUUID().toString());
+
+            // Ajoutez l'image à Firebase Storage
+            imageRef.putFile(imageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // L'image a été téléchargée avec succès, vous pouvez obtenir son URL de téléchargement
+                            Task<Uri> downloadUrlTask = taskSnapshot.getStorage().getDownloadUrl();
+                            Toast.makeText(app.this," L'image a été téléchargée avec succès", Toast.LENGTH_LONG).show();
+                            downloadUrlTask.addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+
+                                        Uri downloadUri = task.getResult();
+                                        // Utilisez l'URL de téléchargement de l'image
+                                        String imageUrl = downloadUri.toString();
+                                        // Faites quelque chose avec l'URL de l'image (par exemple, enregistrez-la dans Firebase Database)
+                                    } else {
+                                        // La récupération de l'URL de téléchargement a échoué
+                                    }
+                                }
+                            });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Le téléchargement de l'image a échoué
+                        }
+                    });
+        }
     }
 
 
